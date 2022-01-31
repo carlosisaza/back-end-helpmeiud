@@ -7,5 +7,7 @@ import co.edu.iudigital.app.model.Usuario;
 
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario, Long>{
+	
+	public Usuario findByNombreAndApellido(String nombre, String apellido);
 
 }

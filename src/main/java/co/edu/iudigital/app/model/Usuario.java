@@ -16,8 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
-
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "usuarios")
@@ -27,38 +26,38 @@ public class Usuario implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotEmpty(message = "Email es obligatorio")
-	@Email(message = "Debe ingresar un email valido")
+	@Email(message = "Debe ingresar un email válido")
 	@Column(unique = true, length = 120)
 	private String username;
 	
 	@Column(length = 120)
 	private String password;
 	
-	@NotEmpty(message = "Nombre es obligatorio")
+	@NotEmpty(message = "nombre es obligatorio")
 	@Column(nullable = false, length = 120)
 	private String nombre;
 	
-	@NotEmpty(message = "Apellido es obligatorio")
-	
+	@NotEmpty(message = "apellido es obligatorio")
+	@Size(min = 1, max = 12, message = "Fuera de rango")
 	@Column(nullable = true, length = 120)
 	private String apellido;
 	
 	@Column(name = "fecha_nacimiento")
 	private LocalDate fechaNacimiento;
 	
-	private Boolean enable;
+	private Boolean enabled;
 	
 	@Column(name = "red_social")
 	private Boolean redSocial;
 	
 	private String image;
-		
+	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "roles_usuarios",
 	joinColumns = {@JoinColumn(name = "usuarios_id")},
@@ -150,17 +149,17 @@ public class Usuario implements Serializable{
 	}
 
 	/**
-	 * @return the enable
+	 * @return the enabled
 	 */
-	public Boolean getEnable() {
-		return enable;
+	public Boolean getEnabled() {
+		return enabled;
 	}
 
 	/**
-	 * @param enable the enable to set
+	 * @param enabled the enabled to set
 	 */
-	public void setEnable(Boolean enable) {
-		this.enable = enable;
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	/**
@@ -206,5 +205,4 @@ public class Usuario implements Serializable{
 	}
 	
 	
-
 }

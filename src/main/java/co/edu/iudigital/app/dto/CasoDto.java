@@ -1,32 +1,11 @@
-package co.edu.iudigital.app.model;
+package co.edu.iudigital.app.dto;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
+public class CasoDto {
 
-@Entity
-@Table(name = "casos")
-public class Caso implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "fecha_hora")
 	private LocalDateTime fechaHora;
 	
 	private float latitud;
@@ -53,25 +32,28 @@ public class Caso implements Serializable{
 	
 	private String descripcion;
 	
-	@Column(name = "url_map")
 	private String urlMap;
-	
-	@Column(name = "rmi_map")
+		
 	private String rmiMap;
+		
+	private Long usuarioId;
 	
-	@ManyToOne
-	@JoinColumn(name = "usuarios_id")
-	private Usuario usuario;
+	private String image;
 	
-	@ManyToOne
-	@JoinColumn(name = "delitos_id")
-	private Delito delito;
+	private String nombre;
 	
-	@PrePersist
-	public void prePersist() {
-		if(fechaHora== null) {
-			fechaHora = LocalDateTime.now();
-		}
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	/**
@@ -187,31 +169,32 @@ public class Caso implements Serializable{
 	}
 
 	/**
-	 * @return the usuario
+	 * @return the usuarioId
 	 */
-	public Usuario getUsuario() {
-		return usuario;
+	public Long getUsuarioId() {
+		return usuarioId;
 	}
 
 	/**
-	 * @param usuario the usuario to set
+	 * @param usuarioId the usuarioId to set
 	 */
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuarioId(Long usuarioId) {
+		this.usuarioId = usuarioId;
 	}
 
 	/**
-	 * @return the delito
+	 * @return the image
 	 */
-	public Delito getDelito() {
-		return delito;
+	public String getImage() {
+		return image;
 	}
 
 	/**
-	 * @param delito the delito to set
+	 * @param image the image to set
 	 */
-	public void setDelito(Delito delito) {
-		this.delito = delito;
+	public void setImage(String image) {
+		this.image = image;
 	}
-	
+
+
 }
